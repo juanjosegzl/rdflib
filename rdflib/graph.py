@@ -383,6 +383,14 @@ class Graph(Node):
         assert isinstance(s, Node), "Subject %s must be an rdflib term" % (s,)
         assert isinstance(p, Node), "Predicate %s must be an rdflib term" % (p,)
         assert isinstance(o, Node), "Object %s must be an rdflib term" % (o,)
+
+        if issubclass(type(s), URIRef):
+            s = URIRef(s)
+        if issubclass(type(p), URIRef):
+            p = URIRef(p)
+        if issubclass(type(o), URIRef):
+            o = URIRef(o)
+
         self.__store.add((s, p, o), self, quoted=False)
 
     def addN(self, quads):
